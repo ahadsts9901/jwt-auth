@@ -20,9 +20,9 @@ body {
     color: #fff!important;
     display: flex;
     flex-direction: column;
-    justify-content: right;
+    justify-content: center;
     /* justify-content: space-between; */
-    /* justify-content: center; */
+    /* justify-content: right; */
     align-items: center;
     row-gap: 2em;
     width: 100vw;
