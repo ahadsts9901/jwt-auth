@@ -10,15 +10,7 @@ async function run() {
         console.log("successfully connected")
     } catch (err) {
         console.log(err.stack)
-        await client.close()
-        process.exit(1)
     }
 }
 
 run().catch(console.dir)
-
-process.on('SIGNINT', async function() {
-    console.log("app is terminating")
-    await client.close()
-    process.exit(0)
-})

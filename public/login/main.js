@@ -16,30 +16,57 @@ function hidePassword(event) {
 
 
 
-// function login(event){
-//     event.preventDefault()
-//     let email = document.getElementById("email-signup")
-//     let password = document.getElementById("password-signup")
+function login(event) {
+    event.preventDefault()
+    let email = document.getElementById("email-login").value
+    let password = document.getElementById("password-login").value
+    let message = document.querySelector(".validationMessage");
 
-//     axios.post(`/api/v1/signup`, {
-//         email: email.value,
-//         password: password.value,
-//     })
-//     .then(function(response) {
-//         console.log("signup successfull")
-//         console.log(response.data);
-//         Swal.fire({
-//             icon: 'success',
-//             title: 'Signup Successfull',
-//             timer: 1000,
-//             showConfirmButton: false
-//         });
-//     })
-//     .catch(function(error) {
-//         // handle error
-//         console.log(error.data);
-//     })
+    if (!(email.endsWith("@gmail.com"))) {
+        message.innerText = `Invalid email address`;
+        message.style.display = "block";
+        message.style.color = "#e55865";
+        return;
+    }
 
-// email.value = ""
-// password.value = ""
-// }
+    if (
+        email.trim() === '' ||
+        password.trim() === '' ||
+        password.length > 8 || password.length < 4
+    ) {
+        message.innerText = `Please fill required fields`;
+        message.style.display = "block";
+        message.style.color = "#e55865";
+        return;
+    }
+
+    axios.post(`/api/v1/login`, {
+            email: email,
+            password: password,
+        })
+        .then(function(response) {
+            // console.log("login successfully")
+            message.style.display = "none"
+                // console.log(response.data);
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successfull',
+                timer: 1000,
+                showConfirmButton: false
+            });
+        })
+        .catch(function(error) {
+            // handle error
+            console.error(error.data);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error in logging in',
+                text: "Please enter correct email or password",
+                timer: 2500,
+                showConfirmButton: false
+            });
+        })
+
+    document.getElementById("email-login").value
+    document.getElementById("password-login").value
+}

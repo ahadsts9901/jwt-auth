@@ -40,7 +40,9 @@ function signup(event) {
         firstName.length > 8 ||
         lastName.length > 8 ||
         password.length > 8 ||
-        confirmPassword.length > 8
+        confirmPassword.length > 8 ||
+        firstName.length < 4 || lastName.length < 4 ||
+        password.length < 4 || confirmPassword.length < 4
     ) {
         message.innerText = `Please fill required fields`;
         message.style.display = "block";
@@ -64,8 +66,8 @@ function signup(event) {
         })
         .then(function(response) {
             message.style.display = "none"
-            console.log("signup successful");
-            console.log(response.data);
+                // console.log("signup successful");
+                // console.log(response.data);
             Swal.fire({
                 icon: 'success',
                 title: 'Signup Successful',

@@ -11,7 +11,62 @@ const col = db.collection("users")
 
 let router = express.Router()
 
-// POST    /api/v1/post
+// login
+
+router.post('/login', async(req, res, next) => {
+
+    if (!req.body.email ||
+        !req.body.password
+    ) {
+        res.status(403);
+        res.send(`required parameters missing, 
+        example request body:
+        {
+            email: "example@gmail.com",
+            password: "pa$$word",
+        } `);
+        return;
+    }
+    req.body.email = req.body.email.toLowerCase();
+
+    try {
+        let result = await col.findOne({ email: req.body.email });
+        console.log("result: ", result);
+
+        if (!result) { // user not found
+            res.status(403).send({
+                message: "email or password incorrect"
+            });
+            return;
+        } else { // user found
+            const isMatch = await varifyHash(req.body.password, result.password)
+
+            if (isMatch) {
+                // TODO: create token for this user
+                res.send({
+                    message: "login successful"
+                });
+                return;
+            } else {
+                res.status(401).send({
+                    message: "email or password incorrect"
+                })
+                return;
+            }
+        }
+
+    } catch (e) {
+        console.log("error getting data mongodb: ", e);
+        res.status(500).send('server error, please try later');
+    }
+
+
+
+})
+
+
+// signup
+
 router.post('/signup', async(req, res, next) => {
 
     if (!req.body.email ||
