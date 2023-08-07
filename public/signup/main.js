@@ -36,13 +36,13 @@ function signup(event) {
         lastName.trim() === '' ||
         email.trim() === '' ||
         password.trim() === '' ||
-        confirmPassword.trim() === '' ||
-        firstName.length > 8 ||
-        lastName.length > 8 ||
-        password.length > 8 ||
-        confirmPassword.length > 8 ||
-        firstName.length < 4 || lastName.length < 4 ||
-        password.length < 4 || confirmPassword.length < 4
+        confirmPassword.trim() === ''
+        // || firstName.length > 8 ||
+        // lastName.length > 8 ||
+        // password.length > 8 ||
+        // confirmPassword.length > 8 ||
+        // firstName.length < 4 || lastName.length < 4 ||
+        // password.length < 4 || confirmPassword.length < 4
     ) {
         message.innerText = `Please fill required fields`;
         message.style.display = "block";

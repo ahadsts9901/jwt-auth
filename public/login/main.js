@@ -31,8 +31,8 @@ function login(event) {
 
     if (
         email.trim() === '' ||
-        password.trim() === '' ||
-        password.length > 8 || password.length < 4
+        password.trim() === ''
+        // || password.length > 8 || password.length < 4
     ) {
         message.innerText = `Please fill required fields`;
         message.style.display = "block";
