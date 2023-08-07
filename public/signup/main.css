@@ -30,9 +30,18 @@ body {
     padding: 2em 1em!important;
 }
 
-p, h1, h2, h3, h4, h5, h6, i, a{
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+i,
+a {
     margin: 0px!important;
 }
+
 
 /* drop down */
 
@@ -79,7 +88,7 @@ a,
 .r {
     display: flex;
     flex-direction: row;
-    padding: 0.5em!important;
+    padding: 0em!important;
     gap: 1em;
     width: 100%;
     height: fit-content;
@@ -88,7 +97,7 @@ a,
 .rr {
     display: flex;
     flex-direction: row-reverse;
-    padding: 0.5em!important;
+    /* padding: 0.5em!important; */
     gap: 1em;
     width: 100%;
     height: fit-content;
@@ -120,7 +129,7 @@ a,
 .c {
     display: flex;
     flex-direction: column;
-    padding: 0.5em!important;
+    padding: 0em!important;
     gap: 1em;
     width: 100%;
     height: fit-content;
@@ -179,7 +188,7 @@ a,
     padding: 0.5em!important;
     border: none;
     width: 100%;
-    margin-top: 1em;
+    /* margin-top: 1em; */
 }
 
 .button:active {
@@ -298,9 +307,10 @@ div:where(.swal2-container) div:where(.swal2-loader) {
     border-color: #15182b #fff!important;
 }
 
+
 /*  */
 
-.login-signup{
+.login-signup {
     background-color: #1f273c;
     width: fit-content;
     height: fit-content;
@@ -309,12 +319,20 @@ div:where(.swal2-container) div:where(.swal2-loader) {
     color: #fff;
 }
 
-.login-signup a, .login-signup p{
+.login-signup a,
+.login-signup p {
     color: #fff;
     font-size: 0.8em;
 }
 
-.name{
+.name {
     padding: 0em 2em 1em 2em;
     font-size: 0.8em;
+}
+
+.validationMessage {
+    display: none;
+    color: #e55865;
+    width: 100%;
+    text-align: center;
 }

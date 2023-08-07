@@ -1,3 +1,21 @@
+// show Password
+function showPassword(event) {
+    event.target.className = "bi bi-eye-slash";
+    event.target.previousElementSibling.type = "text";
+    event.target.removeEventListener('click', showPassword);
+    event.target.addEventListener('click', hidePassword);
+}
+
+// hide password
+function hidePassword(event) {
+    event.target.className = "bi bi-eye";
+    event.target.previousElementSibling.type = "password";
+    event.target.removeEventListener('click', hidePassword);
+    event.target.addEventListener('click', showPassword);
+}
+
+
+
 // function login(event){
 //     event.preventDefault()
 //     let email = document.getElementById("email-signup")

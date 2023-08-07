@@ -42,10 +42,18 @@
 
     <form class="c jcc ais login-signup" onsubmit="signup(event)">
         <h2 class="center">SignUp</h2>
-        <label for="email-signup">E-mail</label>
-        <input required id="email-signup" type="email" class="input" placeholder="example@gmail.com">
-        <label for="password-signup">Password</label>
-        <input required id="password-signup" type="password" class="input" placeholder="Password" minlength="4" maxlength="8">
+        <input required id="first-name" type="text" class="input" placeholder="First Name" minlength="3" maxlength="8">
+        <input required id="last-name" type="text" class="input" placeholder="Last Name" minlength="3" maxlength="8">
+        <input required id="email-signup" type="email" class="input" placeholder="E-mail">
+        <div class="r jcsb aic">
+            <input required id="password-signup" type="password" class="input" placeholder="Password" minlength="4" maxlength="8">
+            <i class="bi bi-eye-slash" onclick="showPassword(event)"></i>
+        </div>
+        <div class="r jcsb aic">
+            <input required id="password-signup-repeat" type="password" class="input" placeholder="Repeat Password" minlength="4" maxlength="8">
+            <i class="bi bi-eye-slash" onclick="showPassword(event)"></i>
+        </div>
+        <p class="validationMessage"></p>
         <button type="submit" class="button">Signup</button>
         <p class="center">Don't have an account ?</p>
         <a href="javascript:void(0)" onclick="window.location.pathname ='/login' " class="center">Login</a>
