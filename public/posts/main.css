@@ -1,5 +1,5 @@
 * {
-    font-family: "Space Mono", monospace;
+    font-family: "Josefin Sans", sans-serif;
     font-weight: bold!important;
     outline: none!important;
 }
@@ -112,6 +112,22 @@ form {
 }
 
 .button:active {
+    background-color: #15182b;
+    color: #b6d1fd;
+}
+
+.logout {
+    color: #15182b;
+    background-color: #b6d1fd;
+    width: 6em;
+    height: 2.5em;
+    border: 0px;
+    border-radius: 15px;
+    font-size: 1em;
+    margin-left: auto;
+}
+
+.logout:active {
     background-color: #15182b;
     color: #b6d1fd;
 }

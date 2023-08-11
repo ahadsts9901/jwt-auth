@@ -6,7 +6,7 @@
     </meta>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     </meta>
-    <title>Mongo DB</title>
+    <title>Posts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     </meta>
     <!-- icons cdn -->
@@ -15,7 +15,7 @@
     <!-- font cdn -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- css -->
     <link rel="stylesheet" type="text/css" href="main.css">
     </link>
@@ -25,7 +25,7 @@
 
 <body>
     <row class="space-around">
-        <h1 class="bi bi-activity green"> Mongo DB</h1>
+        <h1 class="bi bi-activity green"> Posts</h1>
         <div class="dropdown">
             <button class="drop-down" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <h2 class="bi bi-three-dots-vertical dots"></h2>
@@ -39,6 +39,7 @@
                 <li class="list"><a target="_blank" href="https://www.youtube.com/@AhadSTS/" class="drop-down-options" type="button"><i class="bi bi-youtube icon"></i>YouTube</a></li>
             </ul>
         </div>
+        <button class="logout" onclick="window.location.pathname = '/'">Log Out</button>
     </row>
 
     <form onsubmit="createPost(event)">
