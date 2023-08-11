@@ -45,9 +45,9 @@ function login(event) {
             password: password,
         })
         .then(function(response) {
-            // console.log("login successfully")
+            console.log("login successfully")
             message.style.display = "none"
-                // console.log(response.data);
+                console.log(response.data);
             Swal.fire({
                 icon: 'success',
                 title: 'Login Successfull',

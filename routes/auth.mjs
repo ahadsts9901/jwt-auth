@@ -1,4 +1,3 @@
-
 import express from 'express';
 let router = express.Router()
 import { client } from '../mongodb.mjs'
@@ -9,10 +8,10 @@ import {
 } from "bcrypt-inzi";
 
 
-const userCollection = client.db("cruddb").collection("users");
+const col = client.db("cruddb").collection("users");
 
 router.post('/login', async (req, res, next) => {
-
+    
     if (
         !req.body?.email
         || !req.body?.password
@@ -29,7 +28,7 @@ router.post('/login', async (req, res, next) => {
     req.body.email = req.body.email.toLowerCase();
 
     try {
-        let result = await userCollection.findOne({ email: req.body.email });
+        let result = await col.findOne({ email: req.body.email });
         console.log("result: ", result);
 
         if (!result) { // user not found
@@ -76,11 +75,13 @@ router.post('/login', async (req, res, next) => {
         res.status(500).send('server error, please try later');
     }
 })
+
+
 router.post('/signup', async (req, res, next) => {
 
     if (
         !req.body?.firstName
-        || !req.body?.lastName // family name, sur name
+        || !req.body?.lastName
         || !req.body?.email
         || !req.body?.password
     ) {
@@ -97,18 +98,16 @@ router.post('/signup', async (req, res, next) => {
     }
 
     req.body.email = req.body.email.toLowerCase();
-    // TODO: validate email
-
 
     try {
-        let result = await userCollection.findOne({ email: req.body.email });
+        let result = await col.findOne({ email: req.body.email });
         console.log("result: ", result);
 
         if (!result) { // user not found
 
             const passwordHash = await stringToHash(req.body.password);
 
-            const insertResponse = await userCollection.insertOne({
+            const insertResponse = await col.insertOne({
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 email: req.body.email,

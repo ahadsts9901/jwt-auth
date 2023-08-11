@@ -12,10 +12,14 @@ import { decode } from 'punycode';
 const app = express();
 app.use(express.json()); // body parser
 app.use(cookieParser()); // cookie parser
+app.use(express.static(path.join(__dirname, 'public')))
 
-
-// /api/v1/login
 app.use("/api/v1", authRouter)
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Example server listening on port ${PORT}`)
+})
 
 app.use((req, res, next) => {
     console.log("cookies: ", req.cookies);
@@ -24,27 +28,20 @@ app.use((req, res, next) => {
     try {
         const decoded = jwt.verify(token, process.env.SECRET);
         console.log("decoded: ", decoded);
-
+        
         req.body.decoded = {
             firstName: decoded.firstName,
             lastName: decoded.lastName,
             email: decoded.email,
             isAdmin: decoded.isAdmin,
         };
-
+        
         next();
-
+        
     } catch (err) {
         res.status(401).send({ message: "invalid token" })
     }
-
+    
 })
 
 // app.use("/api/v1", postRouter)
-
-app.use(express.static(path.join(__dirname, 'public')))
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Example server listening on port ${PORT}`)
-})
