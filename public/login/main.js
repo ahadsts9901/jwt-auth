@@ -57,6 +57,7 @@ function login(event) {
         })
         .catch(function(error) {
             // handle error
+            console.log("error")
             console.error(error.data);
             Swal.fire({
                 icon: 'error',

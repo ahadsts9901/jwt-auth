@@ -16,14 +16,10 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use("/api/v1", authRouter)
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Example server listening on port ${PORT}`)
-})
 
 app.use((req, res, next) => {
     console.log("cookies: ", req.cookies);
-
+    
     const token = req.cookies.token;
     try {
         const decoded = jwt.verify(token, process.env.SECRET);
@@ -45,3 +41,7 @@ app.use((req, res, next) => {
 })
 
 // app.use("/api/v1", postRouter)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Example server listening on port ${PORT}`)
+})

@@ -26,10 +26,11 @@ router.post('/login', async (req, res, next) => {
         return;
     }
     req.body.email = req.body.email.toLowerCase();
+    console.log(req.body.email)
 
     try {
         let result = await col.findOne({ email: req.body.email });
-        console.log("result: ", result);
+        // console.log("result: ", result);
 
         if (!result) { // user not found
             res.status(403).send({
@@ -37,7 +38,6 @@ router.post('/login', async (req, res, next) => {
             });
             return;
         } else { // user found
-
 
             const isMatch = await varifyHash(req.body.password, result.password)
 
@@ -55,7 +55,6 @@ router.post('/login', async (req, res, next) => {
                 res.cookie('token', token, {
                     httpOnly: true,
                     secure: true,
-                    expires: new Date(dateAfter2MinInMili)
                 });
 
                 res.send({
