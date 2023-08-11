@@ -5,7 +5,7 @@ import 'dotenv/config'
 const __dirname = path.resolve();
 
 import authRouter from './routes/auth.mjs'
-// import postRouter from './routes/post.mjs'
+import postRouter from './routes/post.mjs'
 import cookieParser from 'cookie-parser'
 import { decode } from 'punycode';
 
@@ -40,7 +40,8 @@ app.use((req, res, next) => {
     
 })
 
-// app.use("/api/v1", postRouter)
+app.use("/api/v1", postRouter)
+app.use('/posts',express.static(path.join(__dirname, 'public/posts')))
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Example server listening on port ${PORT}`)

@@ -54,6 +54,7 @@ function login(event) {
                 timer: 1000,
                 showConfirmButton: false
             });
+            window.location.pathname = "/posts"
         })
         .catch(function(error) {
             // handle error
