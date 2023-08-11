@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     
     const token = req.cookies.token;
     try {
-        const decoded = jwt.verify(token, "top_secret");
+        const decoded = jwt.verify(token, process.env.SECRET);
         console.log("decoded: ", decoded);
         
         req.body.decoded = {

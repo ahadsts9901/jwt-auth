@@ -48,7 +48,7 @@ router.post('/login', async (req, res, next) => {
                     firstName: result.firstName,
                     lastName: result.lastName,
                     email: req.body.email,
-                }, "top_secret", {
+                }, process.env.SECRET, {
                     expiresIn: '24h'
                 });
 
