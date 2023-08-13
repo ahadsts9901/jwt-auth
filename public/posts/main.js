@@ -36,8 +36,11 @@ function createPost(event) {
 
 function renderPost() {
     // baseUrl/api/v1/post
-    axios.get(`/api/v1/posts`)
+    axios.get(`/api/v1/posts`, {
+            withCredentials: true
+        })
         .then(function(response) {
+
             let posts = response.data;
             let postContainer = document.querySelector(".result");
             postContainer.innerHTML = "";
@@ -301,6 +304,30 @@ function deleteAllPosts() {
             }
         }
     });
+}
+
+// logout
+
+function logout(event) {
+    event.preventDefault();
+    axios.post(`/api/v1/logout`, {})
+        .then(function(response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Logout Successfully',
+                timer: 1000,
+                showConfirmButton: false
+            });
+            window.location.pathname = "/login"
+        })
+        .catch(function(error) {
+            Swal.fire({
+                icon: 'error',
+                title: "Can't logout",
+                timer: 1000,
+                showConfirmButton: false
+            });
+        });
 }
 
 // refresh page

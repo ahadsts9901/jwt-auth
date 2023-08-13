@@ -47,14 +47,14 @@ function login(event) {
         .then(function(response) {
             console.log("login successfully")
             message.style.display = "none"
-                console.log(response.data);
+            console.log(response.data);
             Swal.fire({
                 icon: 'success',
                 title: 'Login Successfull',
                 timer: 1000,
                 showConfirmButton: false
             });
-            window.location.pathname = "/posts"
+            window.location.pathname = "/"
         })
         .catch(function(error) {
             // handle error

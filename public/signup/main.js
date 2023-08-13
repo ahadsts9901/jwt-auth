@@ -74,7 +74,7 @@ function signup(event) {
                 timer: 1000,
                 showConfirmButton: false
             });
-            window.location.pathname = "/posts"
+            window.location.pathname = "/"
         })
         .catch(function(error) {
             // handle error

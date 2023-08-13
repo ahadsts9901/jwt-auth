@@ -7,14 +7,12 @@ import {
     varifyHash
 } from "bcrypt-inzi";
 
-
 const col = client.db("cruddb").collection("users");
 
-router.post('/login', async (req, res, next) => {
-    
-    if (
-        !req.body?.email
-        || !req.body?.password
+router.post('/login', async(req, res, next) => {
+
+    if (!req.body.email ||
+        !req.body.password
     ) {
         res.status(403);
         res.send(`required parameters missing, 
@@ -42,7 +40,7 @@ router.post('/login', async (req, res, next) => {
             const isMatch = await varifyHash(req.body.password, result.password)
 
             if (isMatch) {
-                
+
                 const token = jwt.sign({
                     isAdmin: false,
                     firstName: result.firstName,
@@ -75,24 +73,15 @@ router.post('/login', async (req, res, next) => {
     }
 })
 
+router.post('/signup', async(req, res, next) => {
 
-router.post('/signup', async (req, res, next) => {
-
-    if (
-        !req.body?.firstName
-        || !req.body?.lastName
-        || !req.body?.email
-        || !req.body?.password
+    if (!req.body.firstName ||
+        !req.body.lastName ||
+        !req.body.email ||
+        !req.body.password
     ) {
         res.status(403);
-        res.send(`required parameters missing, 
-        example request body:
-        {
-            firstName: "some firstName",
-            lastName: "some lastName",
-            email: "some@email.com",
-            password: "some$password",
-        } `);
+        res.send(`required parameters missing, ...`);
         return;
     }
 
@@ -100,7 +89,6 @@ router.post('/signup', async (req, res, next) => {
 
     try {
         let result = await col.findOne({ email: req.body.email });
-        console.log("result: ", result);
 
         if (!result) { // user not found
 
@@ -113,22 +101,45 @@ router.post('/signup', async (req, res, next) => {
                 password: passwordHash,
                 createdOn: new Date()
             });
-            console.log("insertResponse: ", insertResponse);
 
-            res.send({ message: 'Signup successful' });
+            // Generate a token
+            const token = jwt.sign({
+                isAdmin: false,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+            }, process.env.SECRET, {
+                expiresIn: '24h'
+            });
+
+            // Set the token as a cookie
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: true,
+            });
+
+            // Send a response
+            res.send({ message: 'Signup successful', token });
 
         } else {
             res.status(403).send({
-                message: "user already exist with this email"
+                message: "user already exists with this email"
             });
         }
 
     } catch (e) {
-        console.log("error getting data mongodb: ", e);
+        console.log("error getting data from MongoDB: ", e);
         res.status(500).send('server error, please try later');
     }
-})
+});
 
+
+router.post("/logout", async(req, res, next) => {
+    res.cookie('token', "", {
+        httpOnly: true,
+        secure: true,
+    });
+    res.send({ message: 'Logout successful' });
+});
 
 export default router
-
